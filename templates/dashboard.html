@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bolder">Operations Overview</h3>
+    <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill border border-success"><i class="fa-solid fa-circle-check me-1"></i> System Online</span>
+</div>
+
+<!-- AI Alert Row -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-5">
+        <div class="card p-4 h-100 border-start border-danger border-5" style="background-color: #fff5f5;">
+            <div class="d-flex align-items-start">
+                <i class="fa-solid fa-triangle-exclamation text-danger fs-1 me-3 mt-1"></i>
+                <div>
+                    <h5 class="text-danger fw-bold mb-1" id="anomaly-title">Scanning Operations...</h5>
+                    <p class="mb-0 text-muted small" id="anomaly-desc">Loading real-time data flow...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card p-4 h-100 border-start border-primary border-5">
+            <!-- Refresh Button in Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="text-primary fw-bold text-uppercase mb-0"><i class="fa-solid fa-robot me-2"></i>AI Action Plan</h6>
+                <button class="btn btn-sm btn-outline-primary" id="refresh-ai-btn">
+                    <i class="fa-solid fa-arrows-rotate me-1" id="refresh-icon"></i> Refresh
+                </button>
+            </div>
+            <div id="ai-recommendation-panel" class="text-dark">
+                <p class="text-muted mb-0" id="ai-default-text"><i class="fa-solid fa-circle-notch fa-spin me-2"></i> Awaiting manual refresh to generate plan...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- KPI Cards -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card p-4 text-center">
+            <h6 class="text-muted text-uppercase fw-bold mb-2">Tomorrow's Est. Wait</h6>
+            <h2 class="text-warning fw-bolder mb-0" id="pred-wait-time">--</h2>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 1 -->
+<div class="row g-4 mb-4">
+    <div class="col-md-8">
+        <div class="card p-3"><div id="chart-admissions-wait" style="height: 350px;"></div></div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3"><div id="chart-ward-donut" style="height: 350px;"></div></div>
+    </div>
+</div>
+
+<!-- Charts Row 2 -->
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card p-3"><div id="chart-occupancy" style="height: 350px;"></div></div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-3"><div id="chart-staff-ratio" style="height: 350px;"></div></div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<!-- Script for Real AI API Call via Refresh Button Logic -->
+<!-- Script for Real AI API Call via Refresh Button Logic -->
+<!-- Script for Real AI API Call via Refresh Button Logic -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const refreshBtn = document.getElementById('refresh-ai-btn');
+    const refreshIcon = document.getElementById('refresh-icon');
+    const aiPanel = document.getElementById('ai-recommendation-panel');
+
+    refreshBtn.addEventListener('click', function() {
+        // If there is no anomaly data from main.js, do nothing
+        if (!window.currentAnomaly) {
+            aiPanel.innerHTML = "<p class='text-success mb-0 fw-bold'><i class='fa-solid fa-check-circle me-2'></i>No action required. Operations are stable.</p>";
+            return;
+        }
+
+        // Spin the icon and show analyzing text
+        refreshIcon.classList.add('fa-spin');
+        aiPanel.innerHTML = '<p class="text-muted mb-0"><i class="fa-solid fa-circle-notch fa-spin me-2"></i> Generating updated action plan...</p>';
+
+        // Fetch live recommendation from backend
+        fetch('/api/recommendation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(window.currentAnomaly)
+        })
+        .then(res => res.json())
+        .then(resData => {
+            refreshIcon.classList.remove('fa-spin');
+            
+            let cleanHTML = resData.recommendation.replace(/```html|```/g, '').trim();
+
+            if(cleanHTML) {
+                // Directly inject the HTML the AI generated
+                aiPanel.innerHTML = cleanHTML;
+                
+                // NEW: Save this exact HTML to local storage so it survives page reloads
+                localStorage.setItem('medops_ai_plan', cleanHTML);
+                
+            } else {
+                aiPanel.innerHTML = '<p class="text-danger mb-0">Error formatting action plan.</p>';
+            }
+        })
+        .catch(err => {
+            refreshIcon.classList.remove('fa-spin');
+            aiPanel.innerHTML = '<p class="text-danger mb-0"><i class="fa-solid fa-circle-xmark me-2"></i> Failed to generate plan. AI Offline.</p>';
+        });
+    });
+});
+</script>
+{% endblock %}

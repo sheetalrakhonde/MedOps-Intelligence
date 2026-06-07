@@ -1,0 +1,28 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+/* Make markdown output from Gemini look nice */
+#ai-recommendation-panel ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+#ai-recommendation-panel li {
+    margin-bottom: 8px;
+    color: #333;
+}

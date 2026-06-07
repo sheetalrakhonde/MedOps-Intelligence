@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center h-100">
+    <div class="col-lg-8">
+        <div class="d-flex align-items-center mb-4">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                <i class="fa-solid fa-brain fs-4"></i>
+            </div>
+            <div>
+                <h3 class="mb-0 fw-bold">Data Intelligence Agent</h3>
+                <p class="text-muted mb-0">Ask questions about hospital operations, wait times, or anomalies.</p>
+            </div>
+        </div>
+
+        <div class="card shadow-lg border-0 d-flex flex-column" style="height: 65vh;">
+            <!-- Chat Window -->
+            <div id="chat-window" class="card-body overflow-auto p-4" style="background-color: #f8fafc;">
+                <!-- Initial Bot Message -->
+                <div class="d-flex mb-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2 flex-shrink-0" style="width: 40px; height: 40px;">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-3 shadow-sm border" style="max-width: 80%;">
+                        Hello! I am connected directly to your MedOps database. You can ask me things like:
+                        <ul class="mb-0 mt-2 text-muted">
+                            <li>"What was the highest ER wait time at City General?"</li>
+                            <li>"How many anomalies did we have yesterday?"</li>
+                            <li>"What is the average bed occupancy across all hospitals?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Form -->
+            <div class="card-footer bg-white border-top p-3">
+                <form id="chat-form" class="d-flex align-items-center">
+                    <input type="text" id="chat-input" class="form-control form-control-lg border-0 shadow-none bg-light rounded-pill px-4" placeholder="Ask about your hospital data..." required autocomplete="off">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-circle ms-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('chat-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const inputField = document.getElementById('chat-input');
+    const message = inputField.value.trim();
+    if (!message) return;
+
+    const chatWindow = document.getElementById('chat-window');
+
+    // 1. Add User Message to UI
+    chatWindow.innerHTML += `
+        <div class="d-flex mb-4 justify-content-end">
+            <div class="bg-primary text-white p-3 rounded-3 shadow-sm" style="max-width: 80%;">
+                ${message}
+            </div>
+        </div>
+    `;
+    inputField.value = '';
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+
+    // Add typing indicator
+    const typingId = 'typing-' + Date.now();
+    chatWindow.innerHTML += `
+        <div id="${typingId}" class="d-flex mb-4">
+            <div class="bg-light text-secondary rounded-circle d-flex align-items-center justify-content-center me-2 flex-shrink-0" style="width: 40px; height: 40px; border: 1px solid #dee2e6;">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="bg-white p-3 rounded-3 shadow-sm border text-muted">
+                <i class="fa-solid fa-circle-notch fa-spin me-2"></i> Querying Database...
+            </div>
+        </div>
+    `;
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+
+    // 2. Send to API
+    fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        // Remove typing indicator
+        document.getElementById(typingId).remove();
+
+        // Format Markdown boldness (**text** -> <strong>text</strong>)
+        let formattedReply = data.reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Add Bot Message to UI
+        chatWindow.innerHTML += `
+            <div class="d-flex mb-4">
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-2 flex-shrink-0" style="width: 40px; height: 40px;">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bg-white p-3 rounded-3 shadow-sm border text-dark" style="max-width: 80%;">
+                    ${formattedReply}
+                </div>
+            </div>
+        `;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    })
+    .catch(err => {
+        document.getElementById(typingId).remove();
+        chatWindow.innerHTML += `
+            <div class="d-flex mb-4">
+                <div class="bg-danger text-white p-3 rounded-3 shadow-sm" style="max-width: 80%;">
+                    ⚠️ Error connecting to AI. Check console.
+                </div>
+            </div>
+        `;
+    });
+});
+</script>
+{% endblock %}

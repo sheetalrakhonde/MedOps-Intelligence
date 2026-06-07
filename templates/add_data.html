@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="d-flex align-items-center mb-4">
+            <i class="fa-solid fa-file-medical fs-2 text-primary me-3"></i>
+            <h2 class="mb-0 fw-bold">Log Shift Operations</h2>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm border-0">
+                <i class="fa-solid fa-circle-check me-2"></i>{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="card p-4 shadow-sm">
+            <form action="/add_data" method="POST">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-muted fw-bold">Date</label>
+                        <input type="date" class="form-control" name="date" value="{{ today }}" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-muted fw-bold">Hospital Location</label>
+                        <select class="form-select" name="hospital">
+                            <option value="City_General">City General</option>
+                            <option value="Metro_Trauma">Metro Trauma</option>
+                            <option value="Community_Clinic">Community Clinic</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-muted fw-bold">Ward</label>
+                        <select class="form-select" name="ward">
+                            <option value="ER">Emergency Room (ER)</option>
+                            <option value="ICU">Intensive Care Unit (ICU)</option>
+                            <option value="General">General Ward</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row border-top pt-3 mt-2">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-muted fw-bold">Max ER Wait Time (Min)</label>
+                        <input type="number" class="form-control" name="wait_time" placeholder="e.g., 45" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-muted fw-bold">Bed Occupancy (%)</label>
+                        <input type="number" class="form-control" name="occupancy" placeholder="e.g., 85" max="100" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-muted fw-bold">Available Staff</label>
+                        <input type="number" class="form-control" name="staff" placeholder="e.g., 12" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3 fw-bold py-2 fs-5 shadow-sm">
+                    <i class="fa-solid fa-database me-2"></i> Submit to AI Database
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

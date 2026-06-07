@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="row align-items-center mb-5 pb-5">
+        <div class="col-lg-6 pe-lg-5">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-bold">v2.0 Artificial Intelligence</span>
+            <h1 class="display-4 fw-bolder mb-4" style="line-height: 1.2;">Next-Gen Hospital <br><span class="text-primary">Operations Center.</span></h1>
+            <p class="lead text-muted mb-5">Stop reacting to hospital bottlenecks. MedOps Intelligence uses advanced Machine Learning to predict ER surges, flag staff shortages, and automatically generate recovery plans.</p>
+            <div class="d-flex gap-3">
+                <a href="/dashboard" class="btn btn-primary btn-lg px-5 py-3 shadow-lg">Launch Dashboard <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                <a href="/add_data" class="btn btn-light btn-lg px-4 py-3 border">Simulate Data</a>
+            </div>
+        </div>
+        <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+            <img src="{{ url_for('static', filename='images/mainpage.png') }}"
+     class="img-fluid rounded-4 shadow-lg border"
+     style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="row g-4 pt-5 border-top">
+        <div class="col-md-4">
+            <div class="card h-100 p-4 bg-primary bg-opacity-10 border-0">
+                <i class="fa-solid fa-brain text-primary fs-1 mb-3"></i>
+                <h4 class="fw-bold">Predictive Analytics</h4>
+                <p class="text-muted">Linear regression models forecast tomorrow's ER wait times based on historical occupancy and scheduled staff.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 p-4 bg-danger bg-opacity-10 border-0">
+                <i class="fa-solid fa-radar-base text-danger fs-1 mb-3"></i>
+                <h4 class="fw-bold">Anomaly Detection</h4>
+                <p class="text-muted">Unsupervised Isolation Forests scan thousands of patient records daily to flag critical operational failures in real-time.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 p-4 bg-success bg-opacity-10 border-0">
+                <i class="fa-solid fa-wand-magic-sparkles text-success fs-1 mb-3"></i>
+                <h4 class="fw-bold">GenAI Resolutions</h4>
+                <p class="text-muted">Translates complex data anomalies into actionable, plain-English instructions for hospital administration using Google Gemini.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

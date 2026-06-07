@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedOps Intelligence Dashboard</title>
+    <!-- Bootstrap CSS for layout -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Plotly for interactive graphs -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Our custom styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+
+<div class="container-fluid py-4">
+    <header class="mb-4">
+        <h1 class="display-6 fw-bold text-primary"><i class="bi bi-hospital"></i> MedOps Intelligence</h1>
+        <p class="text-muted">AI-Powered Hospital Operations & Anomaly Detection System</p>
+    </header>
+
+    <!-- Top Row: Alerts & Predictions -->
+    <div class="row g-4 mb-4">
+        
+        <!-- ML Anomaly Alert Panel -->
+        <div class="col-md-6">
+            <div class="card border-danger shadow-sm h-100">
+                <div class="card-header bg-danger text-white fw-bold">
+                    ⚠️ AI Anomaly Detected (Last 30 Days)
+                </div>
+                <div class="card-body" id="anomaly-panel">
+                    <p class="text-muted">Scanning data...</p>
+                    <div class="spinner-border text-danger" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GenAI Recommendation Panel -->
+        <div class="col-md-6">
+            <div class="card border-primary shadow-sm h-100">
+                <div class="card-header bg-primary text-white fw-bold">
+                    💡 GenAI Action Plan
+                </div>
+                <div class="card-body" id="ai-recommendation-panel">
+                    <p class="text-muted">Waiting for anomaly data to generate recommendations...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Middle Row: Key Metrics & Predictions -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center py-3">
+                <h6 class="text-muted text-uppercase mb-1">Tomorrow's Predicted Wait Time</h6>
+                <h2 class="fw-bold text-warning" id="pred-wait-time">-- min</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center py-3">
+                <h6 class="text-muted text-uppercase mb-1">Expected Admissions</h6>
+                <h2 class="fw-bold text-info" id="pred-admissions">--</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center py-3">
+                <h6 class="text-muted text-uppercase mb-1">Available Staff Scheduled</h6>
+                <h2 class="fw-bold text-success" id="pred-staff">--</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Row: Data Visualization Charts -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Admissions vs. ER Wait Time (Last 30 Days)</h5>
+                    <div id="chart-admissions-wait" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Bed Occupancy Rate (%)</h5>
+                    <div id="chart-occupancy" style="height: 350px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Custom JavaScript -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
