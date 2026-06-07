@@ -270,12 +270,11 @@ Google Gemini generates natural language recommendations for hospital administra
 
 ---
 
-## 👩‍💻 Author
+## 👩‍💻 Developed by:
 
 **Sheetal Sopan Rakhonde**
 
-B.Sc. Computer Science  
-Artificial Intelligence & Machine Learning Enthusiast
+B.Sc. Computer Scienc
 
 ---
 
