@@ -274,7 +274,7 @@ Google Gemini generates natural language recommendations for hospital administra
 
 **Sheetal Sopan Rakhonde**
 
-B.Sc. Computer Scienc
+B.Sc. Computer Science
 
 ---
 
