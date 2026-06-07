@@ -1,43 +1,42 @@
-# MedOps Intelligence: AI-Driven Anomaly Detection & Resource Optimization for Hospital Operations
+# 🏥 MedOps Intelligence
 
-## Overview
+### AI-Driven Anomaly Detection and Resource Optimization for Hospital Operations
 
-MedOps Intelligence is an AI-powered hospital operations management system that analyzes operational hospital data to identify inefficiencies, detect anomalies, predict future bottlenecks, and provide intelligent recommendations for resource optimization.
-
-The system helps hospital administrators make data-driven decisions by monitoring key operational metrics such as bed occupancy, patient admissions, staff availability, ER wait times, cleaning durations, discharge delays, and inventory usage.
+MedOps Intelligence is an AI-powered hospital operations management system designed to detect operational inefficiencies, predict potential bottlenecks, and provide intelligent recommendations for resource optimization. The system helps hospital administrators make proactive decisions by analyzing operational metrics such as patient admissions, bed occupancy, staff allocation, discharge delays, ER waiting times, and inventory utilization.
 
 ---
 
-## Problem Statement
+## 📌 Problem Statement
 
-Hospitals generate massive amounts of operational data every day. However, most existing systems rely on manual monitoring and static dashboards, making it difficult to identify hidden inefficiencies before they impact patient care.
+Hospitals generate large volumes of operational data every day, but most existing systems rely on manual monitoring and static dashboards. As a result, inefficiencies often remain unnoticed until they affect patient care and hospital performance.
 
 Common challenges include:
 
-- Bed shortages
-- Staff overload
+- Bed shortages and overutilization
+- Staff overload and imbalance
 - Increased ER waiting times
-- Delayed discharge processes
-- Resource allocation inefficiencies
-- Inventory management issues
+- Delayed patient discharge processes
+- Inefficient inventory management
+- Lack of predictive operational insights
 
-MedOps Intelligence addresses these challenges through AI-driven anomaly detection and predictive analytics.
+MedOps Intelligence addresses these challenges through machine learning, predictive analytics, and AI-generated recommendations.
 
 ---
 
-## Key Features
+## 🚀 Key Features
 
-### Anomaly Detection
+### 🔍 Anomaly Detection
 Detects unusual patterns in:
 
-- Bed Occupancy
+- Bed Occupancy Rate
 - Staff Availability
-- ER Wait Time
+- ER Waiting Time
 - Cleaning Delays
 - Discharge Delays
 - Inventory Usage
 
-### Predictive Analytics
+### 📈 Predictive Analytics
+
 Forecasts:
 
 - Future ER Wait Times
@@ -45,98 +44,37 @@ Forecasts:
 - Bed Shortages
 - Operational Risks
 
-### Resource Optimization
-Provides recommendations for:
+### 🤖 AI-Powered Recommendations
 
-- Staff Reallocation
-- Resource Distribution
-- Workflow Improvement
+Generates human-readable recommendations for hospital administrators based on detected anomalies and operational trends.
 
-### AI-Powered Recommendations
-Uses Generative AI to convert technical outputs into human-readable recommendations for hospital administrators.
+Example:
 
-### Interactive Dashboard
-Displays:
+> "High ER congestion detected due to low staff availability in Ward B. Consider reallocating staff from Ward D."
 
-- Real-Time Metrics
-- Alerts
-- Predictions
-- Trends and Insights
+### 📊 Interactive Dashboard
 
-### Synthetic Data Generation
-Generates realistic hospital datasets for model training and testing.
+Provides:
 
----
+- Real-Time Hospital Metrics
+- Anomaly Alerts
+- Trend Analysis
+- Prediction Results
+- Operational Insights
 
-## Technology Stack
+### 🧪 Synthetic Data Generation
 
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
-
-### Backend
-- Python
-- Flask
-
-### Data Processing
-- Pandas
-- NumPy
-
-### Machine Learning
-- Scikit-Learn
-- Isolation Forest
-
-### Visualization
-- Plotly
-
-### Database
-- SQLite
-
-### Environment Management
-- Python-Dotenv
-
-### Generative AI
-- Google Gemini API
+Creates realistic hospital operational datasets for testing and model training.
 
 ---
 
-## Project Structure
-
-```text
-medops-intelligence/
-│
-├── static/
-│   ├── css/
-│   │   └── styles.css
-│   ├── images/
-│   │   └── mainpage.png
-│   └── js/
-│       └── main.js
-│
-├── templates/
-│   ├── add_data.html
-│   ├── base.html
-│   ├── chat.html
-│   ├── dashboard.html
-│   ├── home.html
-│   └── index.html
-│
-├── .env
-├── app.py
-├── data_generator.py
-├── medops_data.db
-├── ml_engine.py
-├── requirements.txt
-└── README.md
-```
-
----
-
-## System Workflow
+## 🏗️ System Architecture
 
 ```text
 Hospital Operational Data
+            │
+            ▼
+Data Collection
             │
             ▼
 Data Preprocessing
@@ -154,80 +92,110 @@ Detection        Module
      │               │
      └───────┬───────┘
              ▼
-      Recommendation
-          Engine
+      AI Recommendation
+            Engine
              │
              ▼
-        Dashboard
+      Interactive Dashboard
 ```
 
 ---
 
-## Machine Learning Pipeline
+## 🛠️ Technology Stack
 
-### Data Preprocessing
-- Data Cleaning
-- Missing Value Handling
-- Data Transformation
+### Frontend
 
-### Feature Engineering
-- Bed Occupancy Rate
-- Patient-to-Staff Ratio
-- ER Wait Time Trends
-- Resource Utilization Metrics
+- HTML5
+- CSS3
+- JavaScript
 
-### Anomaly Detection
-Isolation Forest is used to identify unusual operational patterns and inefficiencies.
+### Backend
 
-### Prediction
-Predictive models forecast upcoming bottlenecks and operational issues.
+- Flask
+- Python
 
-### Recommendation Generation
-AI-generated recommendations help administrators take proactive action.
+### Data Processing
+
+- Pandas
+- NumPy
+
+### Machine Learning
+
+- Scikit-Learn
+- Linear Regression
+
+### Visualization
+
+- Plotly
+
+### Database
+
+- SQLite
+
+### Environment Management
+
+- Python-Dotenv
+
+### Generative AI
+
+- Google Gemini API
 
 ---
 
-## Database
-
-The SQLite database stores:
-
-- Hospital Records
-- Operational Metrics
-- Detected Anomalies
-- Prediction Results
-- Dashboard Data
-
-Database File:
+## 📂 Project Structure
 
 ```text
-medops_data.db
+MedOps-Intelligence/
+│
+├── static/
+│   ├── css/
+│   │   └── styles.css
+│   ├── images/
+│   │   └── mainpage.png
+│   └── js/
+│       └── main.js
+│
+├── templates/
+│   ├── add_data.html
+│   ├── base.html
+│   ├── chat.html
+│   ├── dashboard.html
+│   ├── home.html
+│   └── index.html
+│
+├── app.py
+├── data_generator.py
+├── ml_engine.py
+├── requirements.txt
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## Installation
+## ⚙️ Installation & Setup
 
-### Clone Repository
+### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/medops-intelligence.git
-cd medops-intelligence
+git clone https://github.com/sheetalrakhonde/MedOps-Intelligence.git
+cd MedOps-Intelligence
 ```
 
-### Create Virtual Environment
+### 2. Create Virtual Environment
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configure Environment Variables
+### 4. Create Environment File
 
 Create a `.env` file in the root directory:
 
@@ -235,13 +203,13 @@ Create a `.env` file in the root directory:
 GEMINI_API_KEY=your_api_key_here
 ```
 
-### Run Application
+### 5. Run Application
 
 ```bash
 python app.py
 ```
 
-Open your browser and visit:
+Open your browser:
 
 ```text
 http://127.0.0.1:5000
@@ -249,31 +217,60 @@ http://127.0.0.1:5000
 
 ---
 
-## Future Enhancements
+## 🧠 Machine Learning Workflow
 
-- Multi-Hospital Benchmarking
-- Real-Time Data Integration
-- Advanced Time-Series Forecasting
-- Emergency Prioritization System
-- Explainable AI Module
-- Disease Outbreak Analysis
-- Weather-Aware Forecasting
-- Automated Staff Scheduling
+### Data Preprocessing
+
+- Data Cleaning
+- Missing Value Handling
+- Feature Transformation
+
+### Feature Engineering
+
+- Bed Occupancy Rate
+- Patient-to-Staff Ratio
+- ER Wait Time Metrics
+- Resource Utilization Metrics
+
+### Anomaly Detection
+
+Isolation Forest is used to identify abnormal operational patterns.
+
+### Predictive Analytics
+
+Forecasts future hospital operational issues before they occur.
+
+### Recommendation Generation
+
+Google Gemini generates natural language recommendations for hospital administrators.
 
 ---
 
-## Expected Outcomes
+## 🎯 Expected Outcomes
 
 - Improved Hospital Efficiency
-- Faster Decision-Making
-- Better Resource Allocation
 - Reduced ER Waiting Times
+- Better Resource Allocation
 - Early Detection of Operational Risks
-- Enhanced Patient Care
+- Data-Driven Decision Making
+- Enhanced Patient Care Quality
 
 ---
 
-## Author
+## 🔮 Future Enhancements
+
+- Multi-Hospital Benchmarking
+- Real-Time Hospital Data Integration
+- Advanced Time-Series Forecasting
+- Explainable AI Module
+- Emergency Prioritization System
+- Automated Staff Scheduling
+- Disease Outbreak Impact Analysis
+- Weather-Aware Operational Forecasting
+
+---
+
+## 👩‍💻 Author
 
 **Sheetal Sopan Rakhonde**
 
@@ -282,6 +279,6 @@ Artificial Intelligence & Machine Learning Enthusiast
 
 ---
 
-## Project Tagline
+## 🌟 Project Vision
 
-**Transforming Hospital Operations Through AI-Powered Intelligence and Predictive Analytics**
+> Transforming hospital operations through predictive intelligence, anomaly detection, and AI-powered decision support.
